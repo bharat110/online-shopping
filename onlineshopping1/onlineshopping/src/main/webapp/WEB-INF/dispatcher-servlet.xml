@@ -14,7 +14,11 @@
     http://www.springframework.org/schema/webflow-config/spring-webflow-config.xsd        
     ">
 
-	<context:component-scan base-package="net.kzn.onlineshopping"/>
+	<!-- This is for controller from onlineshopping -->
+	<context:component-scan base-package="net.kzn.onlineshopping.controller"/>
+	
+	<!-- This is for dao from shoppingbackend -->
+	<context:component-scan base-package="net.kzn.shoppingbackend.daoImpl" />
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

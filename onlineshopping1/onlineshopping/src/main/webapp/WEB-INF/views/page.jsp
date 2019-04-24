@@ -48,6 +48,11 @@
     <%@include file="./shared/navbar.jsp" %>
     
     
+    
+    
+    
+    
+    
     <!-- Page Content -->
     
     <div class="content">
@@ -57,17 +62,32 @@
 		<%@include file="home.jsp" %>
 	</c:if>
 	
-		<!-- Load Only When User Click About us -->
+	<!-- Load Only When User Click About us -->
 	<c:if test="${userClickAbout == true }">
 		<%@include file="about.jsp" %>
 	</c:if>
 	
-		<!-- Load Only When User Click Contact us -->
+	<!-- Load Only When User Click Contact us -->
 	<c:if test="${userClickContact == true }">
 		<%@include file="contact.jsp" %>
 	</c:if>
- 
+	
+	<!-- Load Only When User Click All Products or Category Products -->
+	<c:if test="${userClickAllProducts == true or userClickCategoryProducts == true }">
+		<%@include file="listProducts.jsp" %>
+	</c:if>
+	
    </div>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
    <!-- Footer Part -->
    <%@include file="./shared/footer.jsp" %>
 

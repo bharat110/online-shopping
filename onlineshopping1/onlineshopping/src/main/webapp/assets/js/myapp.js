@@ -11,12 +11,14 @@ $(function(){
 	case  'Contact Us' :
 		$('#contact').addClass('active');
 		break;
-	dafault :
-		$('home').addClass('active');
+		
+	case  'All Products' :
+		$('#listOfProducts').addClass('active');
 		break;
 		
-	
+	default :
+		$('#listOfProducts').addClass('active');
+		$('#a_'+menu).addClass('active');
+		break;
 	}
-	
-	
 })
