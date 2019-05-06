@@ -35,6 +35,23 @@
 
 			</div>
 
+
+			<!-- jquery Table Demo Purpose -->
+			<div class="row">
+			
+				<div class="col-xs-12">
+					<table id="proudctListTable" class="table table-striped table borderd">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								
+							</tr>
+						</thead>			
+					</table>
+				</div>
+
+
 		</div>
 
 	</div>

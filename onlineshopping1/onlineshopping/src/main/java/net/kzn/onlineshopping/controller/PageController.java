@@ -1,88 +1,111 @@
 package net.kzn.onlineshopping.controller;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import net.kzn.shoppingbackend.dao.CategoryDao;
+import net.kzn.shoppingbackend.dao.CategoryDAO;
+import net.kzn.shoppingbackend.daoimpl.CategoryDAOImpl;
 import net.kzn.shoppingbackend.dto.Category;
+
 
 @Controller
 public class PageController {
-
+	
 	@Autowired
-	private CategoryDao categoryDao;
-
-	@RequestMapping(value = { "/", "/home" })
-	public ModelAndView index() {
-		ModelAndView mav = new ModelAndView("page");
-		mav.addObject("title", "Home");
-
-		// passing the list of categories
-		mav.addObject("categories", categoryDao.list());
-
-		mav.addObject("userClickHome", true);
-
-		return mav;
+	private CategoryDAO categoryDAO;
+	
+	
+	@RequestMapping(value = {"/", "/home", "/index"})
+	public ModelAndView index() {		
+		ModelAndView mv = new ModelAndView("page");		
+		mv.addObject("title","Home");
+		
+		//passing the list of categories
+		mv.addObject("categories", categoryDAO.list());
+		
+		mv.addObject("userClickHome",true);
+		return mv;					
 	}
-
+	
 	@RequestMapping(value = "/about")
-	public ModelAndView about() {
-		ModelAndView mav = new ModelAndView("page");
-		// passing the list of categories
-		mav.addObject("title", "About Us");
-		mav.addObject("userClickAbout", true);
-
-		return mav;
-	}
-
+	public ModelAndView about() {		
+		ModelAndView mv = new ModelAndView("page");		
+		mv.addObject("title","About Us");
+		mv.addObject("userClickAbout",true);
+		return mv;				
+	}	
+	
 	@RequestMapping(value = "/contact")
-	public ModelAndView contact() {
-		ModelAndView mav = new ModelAndView("page");
-		// passing the list of categories
-		mav.addObject("title", "Contact Us");
-		mav.addObject("userClickContact", true);
-
-		return mav;
-	}
+	public ModelAndView contact() {		
+		ModelAndView mv = new ModelAndView("page");		
+		mv.addObject("title","Contact Us");
+		mv.addObject("userClickContact",true);
+		return mv;				
+	}	
+	
+	
+	/*
+	 * Methods to load all the products and based on category
+	 * */
+	
+	@RequestMapping(value = "/show/all/products")
+	public ModelAndView showAllProducts() {		
+		ModelAndView mv = new ModelAndView("page");		
+		mv.addObject("title","All Products");
+		
+		//passing the list of categories
+		mv.addObject("categories", categoryDAO.list());
+		
+		mv.addObject("userClickAllProducts",true);
+		return mv;				
+	}	
+	
+	@RequestMapping(value = "/show/category/{id}/products")
+	public ModelAndView showCategoryProducts(@PathVariable("id") int id) {		
+		ModelAndView mv = new ModelAndView("page");
+		
+		// categoryDAO to fetch a single category
+		Category category = null;
+		
+		category = categoryDAO.get(id);
+		
+		mv.addObject("title",category.getName());
+		
+		//passing the list of categories
+		mv.addObject("categories", categoryDAO.list());
+		
+		// passing the single category object
+		mv.addObject("category", category);
+		
+		mv.addObject("userClickCategoryProducts",true);
+		return mv;				
+	}	
 	
 	
 	
 	/*
-	 * To display all products and based on categories 
-	 * 
-	 */
-	@RequestMapping(value = "/show/all/products")
-	public ModelAndView showAllProducts() {
-		ModelAndView mav = new ModelAndView("page");
-		// passing the list of categories
-		mav.addObject("title", "All Products");
-		mav.addObject("categories", categoryDao.list());
-		mav.addObject("userClickAllProducts", true);
-
-		return mav;
-	}
+	 * Viewing a single product
+	 * */
 	
-	@RequestMapping(value = "/show/category/{id}/products")
-	public ModelAndView showCategoryProducts(@PathVariable("id") int id) {
-		ModelAndView mav = new ModelAndView("page");
-		
-		// categoryDao to fetch single category
-		Category category = null;
-		category = categoryDao.get(id);
-		
-		
-		// passing the list of categories
-		mav.addObject("title", category.getName());
-		mav.addObject("categories", categoryDao.list());
-		
-		//passing the single category
-		mav.addObject("category", category);
-		mav.addObject("userClickCategoryProducts", true);
-
-		return mav;
-	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

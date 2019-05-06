@@ -94,7 +94,11 @@
     <!-- JavaScript -->
     <script src="${js }/jquery.js"></script>
     <script src="${js }/bootstrap.js"></script>
-
+    
+    <!-- DataTable plugin -->
+	<script src="${js }/jquery.dataTables.js"></script>
+	
+	
 	<!-- my custome js -->
 	<script src="${js }/myapp.js"></script>
 
